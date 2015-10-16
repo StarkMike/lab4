@@ -1,3 +1,15 @@
+.clear {
+  clear: both;
+}
+
 ul {
-  display: none;
+  list-style: none;
+}
+
+#image_list li {
+  float: left;
+}
+
+#image_list img {
+  width: 60px;
 }
