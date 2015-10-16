@@ -17,12 +17,28 @@ $(document).ready(function() {
 
   var imageCounter = 0;
 
-  function swapImage() {
-    imageCounter = (imageCounter + 1) % imageCache.length;
-    image = imageCache[imageCounter];
-    console.log(image);
+  function swapImage(count) {
+    image = imageCache[count];
     $imageNode.attr('src', image.src);
+    $imageNode.attr('alt', image.title);
     $captionNode.html(image.title);
   }
-  var timer = setInterval(swapImage, 2000);
+
+  $('#prev').on('click', function(e) {
+    e.preventDefault();
+    if(--imageCounter < 0) {
+      imageCounter = imageCache.length - 1;
+    }
+    swapImage(imageCounter);
+  });
+
+  $('#next').on('click', function(e) {
+    e.preventDefault();
+    imageCounter = (imageCounter + 1) % imageCache.length;
+    swapImage(imageCounter);
+  })
+  var timer = setInterval(function() {
+    imageCounter = (imageCounter + 1) % imageCache.length;
+    swapImage(imageCounter);
+  }, 2000);
 });
